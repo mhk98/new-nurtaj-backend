@@ -8,35 +8,15 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    // brand_id: {
-    //   type: DataTypes.INTEGER.UNSIGNED,
-    //   allowNull: false,
-    // },
-    // brand_title: {
-    //   type: DataTypes.STRING(256),
-    //   allowNull: true,
-    // },
-    // category_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // subCategoryItem_id: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // category_title: {
-    //   type: DataTypes.STRING(256),
-    //   allowNull: true,
-    // },
     product_type: {
       type: DataTypes.STRING(128),
       allowNull: true,
     },
-    // attribute_set_id: {
-    //   type: DataTypes.INTEGER.UNSIGNED,
-    //   allowNull: true,
-    // },
     title: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+    },
+    brand_title: {
       type: DataTypes.STRING(256),
       allowNull: false,
     },
