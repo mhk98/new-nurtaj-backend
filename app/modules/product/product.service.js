@@ -85,23 +85,60 @@ const insertIntoDB = async (data) => {
 //   };
 // };
 
+
+// const getAllFromDB = async (filters, options) => {
+//   const { page, limit, skip } = paginationHelpers.calculatePagination(options);
+//   const { searchTerm, ...filterData } = filters;
+
+//   const andConditions = [];
+
+//   if (searchTerm) {
+//     // Add a condition to check if `title` starts with the search term
+//     andConditions.push({
+//       title: { [Op.like]: `${searchTerm}%` }, // Matches from the start of the title
+//     });
+//   }
+  
+
+//   if (Object.keys(filterData).length > 0) {
+//     andConditions.push({
+//       [Op.and]: Object.entries(filterData).map(([key, value]) => ({
+//         [key]: { [Op.eq]: value },
+//       })),
+//     });
+//   }
+
+//   const whereConditions = andConditions.length > 0 ? { [Op.and]: andConditions } : {};
+
+//   const result = await Product.findAll({
+//     where: whereConditions,
+//     offset: skip,
+//     limit,
+//     order: options.sortBy && options.sortOrder
+//       ? [[options.sortBy, options.sortOrder.toUpperCase()]]
+//       : [['createdAt', 'ASC']],
+//   });
+
+//   const total = await Product.count({ where: whereConditions });
+
+//   return {
+//     meta: { total, page, limit },
+//     data: result,
+//   };
+// };
+
+
 const getAllFromDB = async (filters, options) => {
   const { page, limit, skip } = paginationHelpers.calculatePagination(options);
   const { searchTerm, ...filterData } = filters;
 
-  const andConditions = [];
+  let andConditions = [];
 
+  // Match `title` starting from the search term
   if (searchTerm) {
-    // Use relevant fields for search
-   if (searchTerm) {
     andConditions.push({
-      [Op.or]: ProductSearchableFields.map((field) => ({
-        [field]: {
-          [Op.iLike]: `%${searchTerm}%`, // Case-insensitive partial match
-        },
-      })),
+      title: { [Op.like]: `${searchTerm}%` },
     });
-  }
   }
 
   if (Object.keys(filterData).length > 0) {
@@ -112,9 +149,10 @@ const getAllFromDB = async (filters, options) => {
     });
   }
 
-  const whereConditions = andConditions.length > 0 ? { [Op.and]: andConditions } : {};
+  let whereConditions = andConditions.length > 0 ? { [Op.and]: andConditions } : {};
 
-  const result = await Product.findAll({
+  // Try to find products matching `title`
+  let result = await Product.findAll({
     where: whereConditions,
     offset: skip,
     limit,
@@ -123,7 +161,39 @@ const getAllFromDB = async (filters, options) => {
       : [['createdAt', 'ASC']],
   });
 
+  // If no products are found with `title`, fallback to `tag`
+  if (result.length === 0 && searchTerm) {
+    andConditions = [];
+    andConditions.push({
+      tag: { [Op.like]: `%${searchTerm}%` }, // Matches anywhere in `tag`
+    });
+
+    if (Object.keys(filterData).length > 0) {
+      andConditions.push({
+        [Op.and]: Object.entries(filterData).map(([key, value]) => ({
+          [key]: { [Op.eq]: value },
+        })),
+      });
+    }
+
+    whereConditions = { [Op.and]: andConditions };
+
+    result = await Product.findAll({
+      where: whereConditions,
+      offset: skip,
+      limit,
+      order: options.sortBy && options.sortOrder
+        ? [[options.sortBy, options.sortOrder.toUpperCase()]]
+        : [['createdAt', 'ASC']],
+    });
+  }
+
   const total = await Product.count({ where: whereConditions });
+
+  // If no products are found in both `title` and `tag`
+  if (result.length === 0) {
+    throw new ApiError(404, "Product not found");
+  }
 
   return {
     meta: { total, page, limit },
