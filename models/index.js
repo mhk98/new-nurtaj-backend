@@ -11,6 +11,7 @@ db.category = require("../app/modules/category/category.model")(db.sequelize, Da
 db.subCategory = require("../app/modules/subCategory/subCategory.model")(db.sequelize, DataTypes);
 db.subCategoryItem = require("../app/modules/subCategoryItem/subCategoryItem.model")(db.sequelize, DataTypes);
 db.seller = require("../app/modules/seller/seller.model")(db.sequelize, DataTypes);
+db.cart = require("../app/modules/cart/cart.model")(db.sequelize, DataTypes);
 
 
 
@@ -47,6 +48,13 @@ db.product.belongsTo(db.subCategoryItem, { foreignKey: "subCategoryItem_id" });
 
 db.seller.hasMany(db.product, { foreignKey: "seller_id" });
 db.product.belongsTo(db.seller, { foreignKey: "seller_id" });
+
+//Product relation with cart table
+db.product.hasMany(db.cart, { foreignKey: "product_id" });
+db.cart.belongsTo(db.product, { foreignKey: "product_id" });
+
+db.user.hasMany(db.cart, { foreignKey: "user_id" });
+db.cart.belongsTo(db.user, { foreignKey: "user_id" });
 
 
 //Relation for brand table

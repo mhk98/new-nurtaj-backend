@@ -20,6 +20,18 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(256),
       allowNull: false,
     },
+    category_title: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+    },
+    subCategoryItem_title: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+    },
+    seller_title: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+    },
     barcode: {
       type: DataTypes.STRING(256),
       allowNull: true,
