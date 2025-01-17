@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes, Sequelize) => {
       },
       Email: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true,
       },
       Password: {
         type: DataTypes.STRING,
-        allowNull: false,   
+        allowNull: true, 
       },
       Address: {
         type: DataTypes.STRING(64),

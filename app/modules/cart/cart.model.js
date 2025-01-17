@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        weight: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
   
         quantity: {
           type: DataTypes.INTEGER,

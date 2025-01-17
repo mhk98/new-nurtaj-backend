@@ -12,6 +12,7 @@ db.subCategory = require("../app/modules/subCategory/subCategory.model")(db.sequ
 db.subCategoryItem = require("../app/modules/subCategoryItem/subCategoryItem.model")(db.sequelize, DataTypes);
 db.seller = require("../app/modules/seller/seller.model")(db.sequelize, DataTypes);
 db.cart = require("../app/modules/cart/cart.model")(db.sequelize, DataTypes);
+db.order = require("../app/modules/order/order.model")(db.sequelize, DataTypes);
 
 
 

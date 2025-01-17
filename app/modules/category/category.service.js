@@ -1,4 +1,6 @@
+const { Op } = require("sequelize");
 const ApiError = require("../../../error/ApiError");
+const paginationHelpers = require("../../../helpers/paginationHelper");
 const db = require("../../../models");
 const Category = db.category;
 const SubCategory = db.subCategory;
@@ -91,6 +93,8 @@ const getAllFromDB = async () => {
 
 
 
+
+
 const updateOneFromDB = async (id, payload) => {
  
 
@@ -108,7 +112,8 @@ const updateOneFromDB = async (id, payload) => {
 const CategoryService = {
   insertIntoDB,
   getAllFromDB,
-  updateOneFromDB
+  updateOneFromDB,
+
 };
 
 module.exports = CategoryService;

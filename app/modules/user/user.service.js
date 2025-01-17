@@ -10,44 +10,35 @@ const ApiError = require("../../../error/ApiError");
 
 
 
-const login = async (buyerData) => {
-
-  const { Email, Password } = buyerData;
-  // console.log(buyerData);
+const login = async (data) => {
+  const { phone } = data;
 
   // Validate request data
-  if (!Email || !Password) {
-    throw new ApiError()
+  if (!phone) {
+    throw new Error("Phone number is required.");
   }
 
-  // Find user by email
-  const user = await User.findOne({ where: { Email } });
+  // Check if user exists in the database
+  let user = await User.findOne({ where: { Phone: phone } });
+
   if (!user) {
-    throw new ApiError(404, "No user found with this email. Please create an account first.");
-  }
-
-  // Validate password
-  const isPasswordValid = bcrypt.compareSync(Password, user.Password);
-  if (!isPasswordValid) {
-    throw new ApiError(401, "Incorrect password or email.")
+    // If user doesn't exist, create a new user
+    user = await User.create({ Phone: phone });
   }
 
   // Generate JWT access token
-  const accessToken = generateToken(user)
+  const accessToken = generateToken({ phone: user.Phone }); // Pass only necessary user info to the token
 
-  // Set access token in cookie
-  const cookieOptions = {
-    secure: process.env.NODE_ENV === "production", // Fixed environment check
-    httpOnly: true,
-  };
-  // res.cookie("accessToken", accessToken, cookieOptions);
   
- const result = {
-  accessToken, user
- }
 
-  return result
+  // Return the access token and user info
+  return accessToken;
+  // return {
+  //   accessToken,
+  //   user,
+  // };
 };
+
 
 
 const register = async (userData) => {

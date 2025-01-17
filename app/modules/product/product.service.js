@@ -233,6 +233,16 @@ const getDataById = async (id) => {
 
   return result
 };
+const getArrivalDataById = async () => {
+  
+  const result = await Product.findAll({
+    where:{
+      product_type:'arrival'
+    }
+  })
+
+  return result
+};
 
 
 const deleteIdFromDB = async (id) => {
@@ -291,7 +301,8 @@ const ProductService = {
   deleteIdFromDB,
   updateOneFromDB,
   getDataById,
-  getAllFromDBWithoutQuery
+  getAllFromDBWithoutQuery,
+  getArrivalDataById
 };
 
 module.exports = ProductService;

@@ -1,7 +1,7 @@
-const { createLogger } = require("winston");
 const catchAsync = require("../../../shared/catchAsync");
 const sendResponse = require("../../../shared/sendResponse");
 const CategoryService = require("./category.service");
+
 
 // Controller method to insert categories into the database
 const insertIntoDB = catchAsync(async (req, res) => {
@@ -40,6 +40,8 @@ const getAllFromDB = catchAsync(async (req, res) => {
 })
 
 
+
+
 const updateOneFromDB = catchAsync(async (req, res) => {
   const {id} = req.params;
   const {categoryTitle, mega} = req.body;
@@ -68,7 +70,8 @@ const updateOneFromDB = catchAsync(async (req, res) => {
 const CategoryController = {
   insertIntoDB,
   getAllFromDB,
-  updateOneFromDB
+  updateOneFromDB,
+
 };
 
 module.exports = CategoryController;

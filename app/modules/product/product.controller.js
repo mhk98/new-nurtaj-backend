@@ -51,6 +51,17 @@ const getDataById = catchAsync(async (req, res) => {
   })
 })
 
+const getArrivalDataById = catchAsync(async (req, res) => {
+
+  const result = await ProductService.getArrivalDataById();
+  sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Arrival Product data fetched!!",
+      data: result
+  })
+})
+
 
 const updateOneFromDB = catchAsync(async (req, res) => {
 const {id} = req.params;
@@ -92,7 +103,8 @@ const getAllFromDBWithoutQuery = catchAsync(async (req, res) => {
   getDataById,
   updateOneFromDB,
   deleteIdFromDB,
-  getAllFromDBWithoutQuery
+  getAllFromDBWithoutQuery,
+  getArrivalDataById
 }
 
 module.exports = ProductController;

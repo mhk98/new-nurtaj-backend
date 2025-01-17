@@ -5,16 +5,17 @@ require("dotenv").config();
 exports.generateToken = (userInfo) => {
   try {
     const payload = {
-      Email: userInfo.Email,
-      role: userInfo.role,
+      Phone: userInfo.phone
     };
 
-    console.log(payload);
+    console.log("payload", payload);
 
     // Token generation with 24 hours expiration
-    const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
-      expiresIn: '40d',  // 1 month + 10 days
-    });
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET
+    //   , {
+    //   expiresIn: '40d',  // 1 month + 10 days
+    // }
+  );
     
 
     return token;

@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 defaultValue: {}, // Default value as an empty object
                 get() {
-                    return JSON.parse(this.getDataValue("orderDetails"));
+                    return JSON.parse(this.getDataValue("cartProducts"));
                 },
                 set(val) {
-                    this.setDataValue("orderDetails", JSON.stringify(val));
+                    this.setDataValue("cartProducts", JSON.stringify(val));
                 },
             },
             firstName: {
@@ -56,10 +56,10 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 defaultValue: false,
             },
-            subTotal: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
+            // subTotal: {
+            //     type: DataTypes.INTEGER,
+            //     allowNull: false,
+            // },
             total: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

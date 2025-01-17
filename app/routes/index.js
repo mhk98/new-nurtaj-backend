@@ -6,6 +6,7 @@ const SubCategoryRoutes = require('../modules/subCategory/subCategory.routes');
 const SubCategoryItemRoutes = require('../modules/subCategoryItem/subCategoryItem.routes');
 const BrandRoutes = require('../modules/brand/brand.routes');
 const CartRoutes = require('../modules/cart/cart.routes');
+const OrderRoutes = require('../modules/order/order.routes');
 
 
 const router = express.Router();
@@ -36,15 +37,19 @@ const moduleRoutes = [
     path: "/product",
     route: ProductRoutes
   },
-
+  {
+    path: "/brand",
+    route: BrandRoutes
+  },
   {
     path: "/cart",
     route: CartRoutes
   },
   {
-    path: "/brand",
-    route: BrandRoutes
+    path: "/order",
+    route: OrderRoutes
   },
+  
  
  
   

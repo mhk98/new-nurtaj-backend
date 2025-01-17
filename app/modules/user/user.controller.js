@@ -9,6 +9,16 @@ const UserService = require("./user.service");
 const login = catchAsync(async (req, res) => {
 
   const result = await UserService.login(req.body);
+
+  // Configure cookie options for token storage (optional: for API responses)
+  const cookieOptions = {
+    secure: process.env.NODE_ENV === "production", // Secure cookies in production
+    httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
+    sameSite: "strict", // Optional: Add for additional security
+  };
+
+  // If you are using `res` for cookies in an Express/Next.js API, uncomment this:
+  res.cookie("accessToken", result.accessToken, cookieOptions);
   sendResponse(res, {
       statusCode: 200,
       success: true,
