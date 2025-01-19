@@ -1,27 +1,23 @@
 // connect to database
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Sequelize } = require("sequelize");
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const dotenv = require("dotenv");
-dotenv.config();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  "freedb_meat_db", // DB_NAME
+  "freedb_meat_db", // DB_USER
+  "Wjse85*Wv32B7pH",      // DB_PASSWORD
   {
-    host: process.env.DB_HOST,  // Use host from environment variable
+    host: "sql.freedb.tech", // DB_HOST
     dialect: "mysql",
     pool: {
       max: 10,
       min: 0,
       idle: 10000,
-      acquire: 30000,  // Add acquire timeout (default 60s)
+      acquire: 30000, // Add acquire timeout (default 60s)
     },
-    // logging: process.env.NODE_ENV !== 'production',  // Enable logging only in non-prod
     logging: false,
-    timezone: "+06:00",  // Timezone
-    port: process.env.DB_PORT || 3306, // Optionally use the DB_PORT from env
+    timezone: "+06:00", // Timezone
+    port: 3306, // MySQL default port
   }
 );
 
