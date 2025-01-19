@@ -80,7 +80,7 @@ app.use((err, req, res, next) => {
 });
 
 // Server setup
-const port = process.env.PORT || 5000; // Use environment variable if available
+const port = process.env.PORT || 8080; // Use environment variable if available
 const server = http.createServer(app);
 
 // Start listening
