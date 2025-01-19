@@ -1,9 +1,10 @@
 const { ENUM_USER_ROLE } = require("../../enums/user");
 const auth = require("../../middlewares/auth");
+const { uploadSingle } = require("../../middlewares/upload");
 const  ProductController = require("./product.controller");
 const router = require("express").Router();
 
-router.post("/create",  ProductController.insertIntoDB);
+router.post("/create", uploadSingle,  ProductController.insertIntoDB);
 router.get("/", ProductController.getAllFromDB);
 router.get("/all", ProductController.getAllFromDBWithoutQuery);
 router.get("/arrival", ProductController.getArrivalDataById);

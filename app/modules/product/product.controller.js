@@ -11,7 +11,11 @@ const { ProductFilterAbleFileds } = require("./product.constants");
 
 
 const insertIntoDB = catchAsync(async (req, res) => {
-  const result = await ProductService.insertIntoDB(req.body);
+
+  const data = req.body;
+  const image = req.file.path;
+  
+  const result = await ProductService.insertIntoDB(data, image);
  
   sendResponse(res, {
       statusCode: 200,
