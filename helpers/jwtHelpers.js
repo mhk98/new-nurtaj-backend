@@ -23,4 +23,4 @@ exports.generateToken = (userInfo) => {
     console.error("Error generating token:", error);
     throw new ApiError(500, "Token generation failed");
   }
-};
+}
