@@ -13,10 +13,10 @@ const insertIntoDB = async (data, image) => {
   // const {product_type, title, short_description, description,price } = data;
   // const {product_type, title, brand_id, category_id, subCategoryItem_id, seller_id, barcode, video_link,short_description,description, slug,tag,price, product_cost, packaging_cost, security_charge, loyalty_point, list_price, tour_price,vat, special_price, special_price_type, special_price_start,special_price_end,sku,manage_stock,qty, max_cart_qty,weight, weight_unit, in_stock,viewed,is_approximate, is_active, is_deleted,is_promotion,is_grocery, shuffle_number,related_products, allow_review,require_moderation,allow_refund, product_qc,delivery_location,minimum_cart_value,aff_commission_amount, aff_commission_type, aff_commission_from,aff_commission_to } = data;
 
-  const {title, description, price} = data;
+  const {title, description, price, category_id, subCategoryItem_id } = data;
 
 const info = {
-  title, description, price, default_image: image
+  title, description, price, category_id, subCategoryItem_id, default_image: image
 }
 
 

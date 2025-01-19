@@ -3,11 +3,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "freedb_meat_db", // DB_NAME
-  "freedb_meat_db", // DB_USER
-  "Wjse85*Wv32B7pH",      // DB_PASSWORD
+  "fishnmeatdb", // DB_NAME
+  "fishnmeat", // DB_USER
+  "Fishnmeat@123",      // DB_PASSWORD
   {
-    host: "sql.freedb.tech", // DB_HOST
+    host: "127.0.0.1", // DB_HOST
     dialect: "mysql",
     pool: {
       max: 10,
