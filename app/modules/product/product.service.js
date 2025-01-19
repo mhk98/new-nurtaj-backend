@@ -16,7 +16,7 @@ const insertIntoDB = async (data, image) => {
   const {title, description, price, category_id, subCategoryItem_id } = data;
 
 const info = {
-  title, description, price, category_id, subCategoryItem_id, default_image: image
+  title, description, price, category_id, subCategoryItem_id, default_image: image, product_type:'arrival'
 }
 
 
